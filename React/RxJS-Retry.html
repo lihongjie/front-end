@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>bufferCount</title>
+  <script src="https://npmcdn.com/@reactivex/rxjs@5.0.0-beta.3/dist/global/Rx.umd.js"></script>
+</head>
+<body>
+<script src="https://fb.me/react-with-addons-15.1.0.js"></script>
+<script src="https://fb.me/react-dom-15.1.0.js"></script>
+<script type="text/javascript">
+"use strict";
+//emit value every 1s
+var source = Rx.Observable.interval(1000);
+var example = source
+    .map(function (val) {
+    if (val > 5) {
+        //error will be picked up by retryWhen
+        throw val;
+    }
+    return val;
+})
+    .retryWhen(function (errors) { return errors
+    .do(function (val) { return console.log("Value " + val + " was too high!"); })
+    .delayWhen(function (val) { return Rx.Observable.timer(val * 1000); }); });
+/*
+  output:
+  0
+  1
+  2
+  3
+  4
+  5
+  "Value 6 was too high!"
+  --Wait 5 seconds then repeat
+*/
+var subscribe = example.subscribe(console.log);
+</script>
+</body>
+</html>

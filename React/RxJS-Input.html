@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>RxJS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Search controls -->
+    <h1>Search Github Users</h1>
+    <div class="form-group">
+        <label for="search-box">
+            Username:
+        </label>
+        <input
+            id="search-box"
+            type="text"
+            class="form-control"
+        />
+    </div>
+    <button
+        id="search-button"
+        class="btn btn-primary"
+    >
+        Search
+    </button>
+</div>
+<script type="text/babel">
+let userClicksSearchButton = Rx.Observable.fromEvent(
+        $("#search-button"),
+        "click"
+    )
+    .map((event) => {
+        return $("#search-box").val();
+    });
+
+userClicksSearchButton.subscribe((searchTerm) => {
+    alert(searchTerm);
+});
+</script>
+
+</body>
+</html>
