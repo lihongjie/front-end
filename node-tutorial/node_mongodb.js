@@ -1,36 +1,42 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://192.168.31.122:27017";
-var demo = {name:'Hello World', value:'test demo'};
-var collection = 'nodejs';
+// const url = 'mongodb://admin:123456@localhost:27017/'; 有密码连接方式 
+
+const dbName="test";
+
+var collection = 'site';
 
 var a = 'a';
 var c = 'c';
+var demo = {name:'Hello World', value:'test demo'};
 
 MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
     if (err) throw err;
     console.log('数据库已创建');
-    var client = db.db("test");
-    // client.createCollection(collection, function (err, res) {
-    //     if (err) throw err;
-    //     console.log("创建集合!");
-    //     db.close();
-    // });
+    var client = db.db(dbName);
 
-
-
-    // find
-    client.collection(a). find({}).toArray(function(err, result) { // 返回集合中所有数据
+    //创建集合
+    client.createCollection(collection, function (err, res) {
         if (err) throw err;
-        // console.log(result);
-
-        client.collection(c).insertMany(result, function (error, result) {
-            if(error)
-                throw error;
-            console.log("文档插入成功");
-
-        });
-
+        console.log("创建集合!");
+        db.close();
     });
+
+
+
+    // find 返回集合中所有数据
+    // client.collection(a). find({}).toArray(function(err, result) { 
+    //     if (err) throw err;
+    //     // console.log(result);
+
+    //     client.collection(c).insertMany(result, function (error, result) {
+    //         if(error)
+    //             throw error;
+    //         console.log("文档插入成功");
+
+    //     });
+
+    // });
 
     //insert
     // client.collection(collection).insertMany(myresult, function (error, result) {
