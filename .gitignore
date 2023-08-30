@@ -11,5 +11,5 @@ doc/
 *.iml
 
 out.txt
-
+/mock-server/node_modules
 /React/webpack-react-demo/node_modules

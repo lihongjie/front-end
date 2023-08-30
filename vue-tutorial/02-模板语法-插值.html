@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <title>vue2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- 引入组件库 
+	<script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+	-->
+	<!-- 引入组件库 -->
+	<script type="text/javascript" src="./vue-2.5.13.js"></script>
+</style>
+</head>
+<body>
+<!-- 容器 -->
+<div id="app">
+	<h1>插值语法</h1>
+	<h1>hello,{{school.name}}</h1>
+	<hr />
+	<h1>指令语法</h1>
+	<a v-bind:href="school.url">点我{{school.name}}</a>
+	<a :href="school.url">点我{{school.name}}</a>
+</div>
+
+
+
+<script type="text/javascript">
+	Vue.config.productionTip = false //阻止vue在启动时生成生产提示
+	//创建Vue实例
+    new Vue({
+		el:'#app',
+		data:{
+			name:'Vue开发者',
+			school:{
+				name:'百度',
+				url:'https://www.baidu.com'
+			}
+		}
+	})
+</script>
+
+</body>
+
+</html>
